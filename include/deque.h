@@ -1,10 +1,9 @@
 #pragma once
 #include <stdexcept>
-
 #include <iostream>
 
 template<typename T>
-class Deque
+class deque
 {
 private:
   struct Node
@@ -39,14 +38,20 @@ public:
 
   bool contains(const T& v) const;
 
-	void clear();
+  void clear();
 
-	#ifndef NDEBUG
-        void print();
-	#endif
+  void print();
 
-private:
-        bool common_pop();
+	friend std::ostream& operator<<(std::ostream& os, const deque<T>& deque) {
+    Node* c = deque.head;
+    while (c != nullptr) {
+      os << c->data << ' ';
+      c = c->next;
+    }
+    return os;
+	}
+
+    private : bool common_pop();
 
   Node* head = nullptr;
   Node* tail = nullptr;

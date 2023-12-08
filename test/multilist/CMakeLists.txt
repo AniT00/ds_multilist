@@ -1,4 +1,4 @@
-add_executable(multilist main.cpp)
+add_executable(multilist "multilist.cpp")
 
 message(${INCLUDE_ROOT})
 

@@ -1,7 +1,7 @@
 #include "deque.h"
 
 template<typename T>
-Deque<T>::Node::Node(const T& data, Node* next, Node* prev)
+deque<T>::Node::Node(const T& data, Node* next, Node* prev)
 {
   this->data = data;
   this->next = next;
@@ -10,7 +10,7 @@ Deque<T>::Node::Node(const T& data, Node* next, Node* prev)
 
 template<typename T>
 void
-Deque<T>::push_back(const T& v)
+deque<T>::push_back(const T& v)
 {
   m_size++;
   if (tail == nullptr) {
@@ -23,7 +23,7 @@ Deque<T>::push_back(const T& v)
 
 template<typename T>
 void
-Deque<T>::pop_back()
+deque<T>::pop_back()
 {
   if (common_pop()) {
     return;
@@ -36,14 +36,14 @@ Deque<T>::pop_back()
 
 template<typename T>
 const T&
-Deque<T>::back() const
+deque<T>::back() const
 {
   return tail->data;
 }
 
 template<typename T>
 void
-Deque<T>::push_front(const T& v)
+deque<T>::push_front(const T& v)
 {
   m_size++;
   if (head == nullptr) {
@@ -55,7 +55,7 @@ Deque<T>::push_front(const T& v)
 
 template<typename T>
 void
-Deque<T>::pop_front()
+deque<T>::pop_front()
 {
   if (common_pop()) {
     return;
@@ -68,14 +68,14 @@ Deque<T>::pop_front()
 
 template<typename T>
 const T&
-Deque<T>::front() const
+deque<T>::front() const
 {
   return head->data;
 }
 
 template<typename T>
 void
-Deque<T>::swap()
+deque<T>::swap()
 {
   if (empty()) {
     return;
@@ -85,22 +85,23 @@ Deque<T>::swap()
 
 template<typename T>
 bool
-Deque<T>::empty() const
+deque<T>::empty() const
 {
   return m_size == 0;
 }
 
 template<typename T>
 size_t
-Deque<T>::size() const
+deque<T>::size() const
 {
   return m_size;
 }
 
 template<typename T>
 void
-Deque<T>::rotate()
+deque<T>::rotate()
 {
+  Node* prev_b;
   Node* b = head;
   Node* e = tail;
   while (b != e) {
@@ -110,12 +111,15 @@ Deque<T>::rotate()
       break;
     }
     e = e->prev;
+    if (b == e) {
+      break;
+    }
   }
 }
 
 template<typename T>
 bool
-Deque<T>::contains(const T& v) const
+deque<T>::contains(const T& v) const
 {
   Node* c = head;
   while (c != nullptr) {
@@ -124,11 +128,12 @@ Deque<T>::contains(const T& v) const
     }
     c = c->next;
   }
+  return false;
 }
 
 template<typename T>
 void
-Deque<T>::clear()
+deque<T>::clear()
 {
   Node* c = head;
   while (c != nullptr) {
@@ -140,10 +145,9 @@ Deque<T>::clear()
   m_size = 0;
 }
 
-#ifndef NDEBUG
 template<typename T>
 void
-Deque<T>::print()
+deque<T>::print()
 {
   Node* c = head;
   while (c != nullptr) {
@@ -152,11 +156,10 @@ Deque<T>::print()
   }
   std::cout << '\n';
 }
-#endif
 
 template<typename T>
 bool
-Deque<T>::common_pop()
+deque<T>::common_pop()
 {
   if (m_size == 0) {
     throw std::logic_error("Attemt to remove from empty deque.");

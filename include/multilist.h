@@ -4,7 +4,7 @@
 #include <vector>
 
 template<typename T>
-class Multilist
+class multilist
 {
 private:
   struct Node
@@ -55,20 +55,17 @@ public:
     m_size++;
   }
 
-  void remove_level(int level)
-  {
-    remove_level(level, m_head);
-  }
+  void remove_level(int level) { remove_level(level, m_head); }
 
- /* void remove_branch(const T& root)
-  {
-    Node* found_elem = find(root);
-    if (found_elem == nullptr) {
-      throw std::exception("No such element");
-    }
-    Node* n = found_elem->next;
-    clear(found_elem);
-  }*/
+  /* void remove_branch(const T& root)
+   {
+     Node* found_elem = find(root);
+     if (found_elem == nullptr) {
+       throw std::exception("No such element");
+     }
+     Node* n = found_elem->next;
+     clear(found_elem);
+   }*/
 
   void remove_branch(const T& elem)
   {
@@ -86,7 +83,7 @@ public:
     m_head = nullptr;
   }
 
-  friend std::ostream& operator<<(std::ostream& os, const Multilist<T>& list)
+  friend std::ostream& operator<<(std::ostream& os, const multilist<T>& list)
   {
     list.print(os, 0);
     return os;
@@ -97,26 +94,24 @@ private:
   size_t m_size = 0;
   std::vector<size_t> m_level_sizes;
 
-	void remove_level(int level, Node* n)
+  void remove_level(int level, Node* n)
   {
     Node* cur = n;
     if (level == 0) {
       clear(m_head);
       m_head = nullptr;
-    }
-    else if (level > 1) {
+    } else if (level > 1) {
       while (cur != nullptr) {
         if (cur->child != nullptr) {
 
           remove_level(level - 1, cur->child);
         }
-				cur = cur->next;
+        cur = cur->next;
       }
-		}
-		else {
+    } else {
       clear(n->child);
       n->child = nullptr;
-		}
+    }
   }
 
   Node* find(const T& v, Node* root = nullptr, bool get_first = false)

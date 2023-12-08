@@ -1,4 +1,4 @@
-add_executable(deque main.cpp)
+add_executable(deque "deque.cpp")
 
 message(${INCLUDE_ROOT})
 

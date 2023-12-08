@@ -15,7 +15,7 @@ enum Option
 };
 
 void
-insert(Multilist<int>& list)
+insert(multilist<int>& list)
 {
   int v, elem;
   char child;
@@ -33,7 +33,7 @@ insert(Multilist<int>& list)
 }
 
 void
-remove_branch(Multilist<int>& list)
+remove_branch(multilist<int>& list)
 {
   int v;
   std::cout << "Enter value: ";
@@ -42,7 +42,7 @@ remove_branch(Multilist<int>& list)
 }
 
 void
-remove_level(Multilist<int>& list)
+remove_level(multilist<int>& list)
 {
   int v;
   std::cout << "Enter level: ";
@@ -53,7 +53,7 @@ remove_level(Multilist<int>& list)
 int
 main()
 {
-  Multilist<int> list;
+  multilist<int> list;
   list.insert(2);
   list.insert(3, 2, true);
   list.insert(4, 3, true);
